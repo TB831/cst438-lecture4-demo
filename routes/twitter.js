@@ -13,7 +13,6 @@ var keys = {
 var combined = keys.client + ":" + keys.secret; 
 var base64encoded = btoa(combined); 
 
-
 function getAccessToken(handleAccessTokenResponse) {
     const options = {
         hostname: "api.twitter.com", 
@@ -62,10 +61,11 @@ function getAccessToken(handleAccessTokenResponse) {
 //https://api.twitter.com/1.1/search/tweets.json?q=birds
 
 function getTweets(accessToken, sendResponseToBrowser) {
+    var search = "cars";
     const options = {
         hostname: "api.twitter.com", 
         port: 443, 
-        path: '/1.1/search/tweets.json?q=birds',
+        path: '/1.1/search/tweets.json?q=' + search,
         method: 'GET', 
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -97,8 +97,43 @@ function getTweets(accessToken, sendResponseToBrowser) {
     
 }
 
-
-
+function makeApiRequest(sendBackResponseToBrowser) {
+    const options = {
+        hostname: "api.gettyimages.com", 
+        port: 443, 
+        path: '/v3/search/images?fields=comp',
+        method: 'GET', 
+        headers: {
+            'Api-Key': process.env.GETTY_API_KEY
+        }
+    }; 
+    var apiResponse = ''; 
+    
+    https.get(options, function(response){
+        response.setEncoding('utf8');
+        response.on('data', function(chunk) {
+            console.log("received data: "); 
+            apiResponse += chunk; 
+        }); 
+        
+        response.on('end', function() {
+            console.log("status code: " + this.statusCode); 
+            //console.log("Complete response: " + apiResponse); 
+            /*execute callback*/
+            var responseJSON = JSON.parse(apiResponse); 
+            var images = responseJSON.images; 
+            console.log(responseJSON); 
+            console.log("num images: " + images.length); 
+            console.log("url of first image: " + images[0].display_sizes[0].uri); 
+            var imageURI = images[3].display_sizes[0].uri; 
+            
+            sendBackResponseToBrowser(imageURI); 
+            
+        }); 
+    }).on("error", function(e) {
+        console.log("Got an error: " + e.message); 
+    }); 
+}
 
 router.get('/', function(req, res, next) {
   getAccessToken(function(accessToken) {
@@ -108,6 +143,13 @@ router.get('/', function(req, res, next) {
         
         res.render('twitter', {tweets: tweets});
     }); 
+  }); 
+});
+
+router.get('/', function(req, res, next) {
+  //res.render('index', { title: 'Express', className: 'CST438' });
+  makeApiRequest(function(imageURI){
+      res.render('getty', {imageURI: imageURI});
   }); 
 });
 

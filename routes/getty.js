@@ -17,6 +17,15 @@ const options = {
 }; 
 
 function makeApiRequest(sendBackResponseToBrowser) {
+    const options = {
+        hostname: "api.gettyimages.com", 
+        port: 443, 
+        path: '/v3/search/images?fields=comp',
+        method: 'GET', 
+        headers: {
+            'Api-Key': process.env.GETTY_API_KEY
+        }
+    }; 
     var apiResponse = ''; 
     
     https.get(options, function(response){
