@@ -8,6 +8,8 @@ var keys = {
     secret: process.env.TWITTER_SECRET_KEY
 }
 
+var myArray = ["motivation","cars","sports","nfl","programming"];
+var search = myArray[Math.floor(Math.random() * myArray.length)];
 
 
 var combined = keys.client + ":" + keys.secret; 
@@ -61,7 +63,6 @@ function getAccessToken(handleAccessTokenResponse) {
 //https://api.twitter.com/1.1/search/tweets.json?q=birds
 
 function getTweets(accessToken, sendResponseToBrowser) {
-    var search = "cars";
     const options = {
         hostname: "api.twitter.com", 
         port: 443, 
@@ -86,6 +87,7 @@ function getTweets(accessToken, sendResponseToBrowser) {
             console.log("########################################"); 
             console.log("status code: " + this.statusCode); 
             //console.log("Complete response: " + completeResponse); 
+            console.log("current search term: " + search);
             
             var responseJSON = JSON.parse(completeResponse); 
             var tweetsList = responseJSON.statuses; 
@@ -139,7 +141,7 @@ router.get('/', function(req, res, next) {
   getAccessToken(function(accessToken) {
     getTweets(accessToken, function(tweets) {
         //res.send("Hurrah"); 
-        console.log("num tweets: " + tweets.length); 
+        console.log("num tweets: " + tweets.length);
         
         res.render('twitter', {tweets: tweets});
     }); 

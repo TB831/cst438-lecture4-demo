@@ -1,8 +1,19 @@
-extends layout
-
-block content
-  h1 Tweets
-  ul
-      each tweet in tweets
-          li= tweet.text
+doctype html
+html
+  head
+    title Twitter & Getty
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    style(type='text/css').
+      body {
+                background: url('!{imageURI}');
+                background-size: cover;
+                background-repeat: no-repeat; 
+                height: 300px;
+            }
+  body #{imageURI}
+    block content
+      h1 Tweets
+      ul
+          each tweet in tweets
+              li= tweet.text
           
