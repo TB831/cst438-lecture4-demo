@@ -88,8 +88,10 @@ function getTweets(accessToken) {
             var tweetsList = responseJSON.statuses; 
             
             for (var i = 0; i < tweetsList.length; i++) {
-                console.log("Tweet: " + tweetsList[i].text ); 
+                console.log("Tweet: " + tweetsList[i].text );
             }
+            var oneTweet = tweetsList[0].text;
+            console.log(oneTweet);
             //console.log("Number of tweets: " + responseJSON.statuses.length);
             
             //console.log(responseJSON); 

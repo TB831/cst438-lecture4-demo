@@ -90,8 +90,10 @@ function getTweets(accessToken, sendResponseToBrowser) {
             console.log("current search term: " + search);
             
             var responseJSON = JSON.parse(completeResponse); 
-            var tweetsList = responseJSON.statuses; 
-            sendResponseToBrowser(tweetsList); 
+            var tweetsList = responseJSON.statuses;
+            console.log("first tweet is : " + tweetsList[0].text)
+            var oneTweet = tweetsList[0];
+            sendResponseToBrowser(tweetsList);
       }); 
     });
     
@@ -142,16 +144,10 @@ router.get('/', function(req, res, next) {
     getTweets(accessToken, function(tweets) {
         //res.send("Hurrah"); 
         console.log("num tweets: " + tweets.length);
-        
-        res.render('twitter', {tweets: tweets});
+        makeApiRequest(function(imageURI){
+          res.render('twitter', {tweets:tweets, imageURI: imageURI});
+      });
     }); 
-  }); 
-});
-
-router.get('/', function(req, res, next) {
-  //res.render('index', { title: 'Express', className: 'CST438' });
-  makeApiRequest(function(imageURI){
-      res.render('getty', {imageURI: imageURI});
   }); 
 });
 

@@ -1,19 +1,33 @@
 doctype html
 html
   head
-    title Twitter & Getty
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    title= Homework4
     style(type='text/css').
-      body {
-                background: url('!{imageURI}');
-                background-size: cover;
-                background-repeat: no-repeat; 
-                height: 300px;
-            }
-  body #{imageURI}
-    block content
-      h1 Tweets
-      ul
-          each tweet in tweets
-              li= tweet.text
-          
+        body {
+            background-image: url('!{imageURI}');
+            background-size: cover;
+            background-repeat: no-repeat; 
+        }
+        h1 {
+          text-align:center;
+          font-family: "Comic Sans MS", "Comic Sans", cursive;
+          margin: auto;
+          width: 50%;
+          border: 3px solid blue;
+          padding: 10px;
+        }
+        li {
+          text-align:center;
+          text-decoration: underline;
+          opacity: 0.5;
+          font-family: "Comic Sans MS", "Comic Sans", cursive;
+          margin: auto;
+          width: 50%px;
+        }
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+  h1 Tweets 
+  ul
+      each tweet in tweets
+        li= tweet.text
+        -break

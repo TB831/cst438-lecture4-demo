@@ -2,11 +2,12 @@ var express = require('express');
 var router = express.Router();
 var https = require('https'); 
 
+var myArray = ["motivation","cars","sports","nfl","programming"];
+var search = myArray[Math.floor(Math.random() * myArray.length)];
+
 
 console.log("In getty!!!!!!!!!!!!"); 
 console.log("api key: " + process.env.GETTY_API_KEY); 
-
-var search = "cars";
 
 function makeApiRequest(sendBackResponseToBrowser) {
     const options = {
@@ -33,11 +34,10 @@ function makeApiRequest(sendBackResponseToBrowser) {
             /*execute callback*/
             var responseJSON = JSON.parse(apiResponse); 
             var images = responseJSON.images;
-            console.log("current search: " + search);
             console.log(responseJSON); 
             console.log("num images: " + images.length); 
             console.log("url of first image: " + images[0].display_sizes[0].uri); 
-            var imageURI = images[3].display_sizes[0].uri; 
+            var imageURI = images[0].display_sizes[0].uri; 
             
             sendBackResponseToBrowser(imageURI); 
             
