@@ -8,9 +8,9 @@ var keys = {
     secret: process.env.TWITTER_SECRET_KEY
 }
 
+
 var myArray = ["fire","water","earth","air"];
 var search = myArray[Math.floor(Math.random() * myArray.length)];
-
 
 var combined = keys.client + ":" + keys.secret; 
 var base64encoded = btoa(combined); 
