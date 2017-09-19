@@ -5,24 +5,29 @@ html
     style(type='text/css').
         body {
             background-image: url('!{imageURI}');
-            background-size: cover;
-            background-repeat: no-repeat; 
+            background-repeat: repeat-x;
+            background-position: center;
+            margin-right: 30px;
+            margin-left: 30px;
         }
         h1 {
           text-align:center;
           font-family: "Comic Sans MS", "Comic Sans", cursive;
+          color:white;
           margin: auto;
           width: 50%;
-          border: 3px solid blue;
+          border: 5px dashed blue;
           padding: 10px;
         }
         li {
           text-align:center;
           text-decoration: underline;
-          opacity: 0.5;
+          background-color: blue;
+          text-background: red;
+          color:white;
           font-family: "Comic Sans MS", "Comic Sans", cursive;
           margin: auto;
-          width: 50%px;
+          width: 50%px
         }
     link(rel='stylesheet', href='/stylesheets/style.css')
   body

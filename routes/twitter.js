@@ -8,7 +8,7 @@ var keys = {
     secret: process.env.TWITTER_SECRET_KEY
 }
 
-var myArray = ["motivation","cars","sports","nfl","programming"];
+var myArray = ["fire","water","earth","air"];
 var search = myArray[Math.floor(Math.random() * myArray.length)];
 
 
@@ -105,7 +105,7 @@ function makeApiRequest(sendBackResponseToBrowser) {
     const options = {
         hostname: "api.gettyimages.com", 
         port: 443, 
-        path: '/v3/search/images?fields=comp',
+        path: '/v3/search/images?phrase=' + search,
         method: 'GET', 
         headers: {
             'Api-Key': process.env.GETTY_API_KEY
@@ -129,7 +129,7 @@ function makeApiRequest(sendBackResponseToBrowser) {
             console.log(responseJSON); 
             console.log("num images: " + images.length); 
             console.log("url of first image: " + images[0].display_sizes[0].uri); 
-            var imageURI = images[3].display_sizes[0].uri; 
+            var imageURI = images[0].display_sizes[0].uri; 
             
             sendBackResponseToBrowser(imageURI); 
             
