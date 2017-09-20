@@ -88,11 +88,11 @@ function getTweets(accessToken, sendResponseToBrowser) {
             console.log("status code: " + this.statusCode); 
             console.log("Complete response: " + completeResponse); 
             console.log("current search term: " + search);
+            console.log(keys.client);
+            console.log(keys.secret);
             
             var responseJSON = JSON.parse(completeResponse); 
             var tweetsList = responseJSON.statuses;
-            console.log("first tweet is : " + tweetsList[0].text)
-            var oneTweet = tweetsList[0];
             sendResponseToBrowser(tweetsList);
       }); 
     });
