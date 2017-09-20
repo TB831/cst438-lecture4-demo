@@ -86,7 +86,7 @@ function getTweets(accessToken, sendResponseToBrowser) {
       twitterResponse.on('end', function() {
             console.log("########################################"); 
             console.log("status code: " + this.statusCode); 
-            //console.log("Complete response: " + completeResponse); 
+            console.log("Complete response: " + completeResponse); 
             console.log("current search term: " + search);
             
             var responseJSON = JSON.parse(completeResponse); 
